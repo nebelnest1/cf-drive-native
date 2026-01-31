@@ -1,0 +1,16 @@
+{
+  "title_preview": "Náhled",
+  "protect_ok": "Google Play Protect: nebyly nalezeny žádné hrozby",
+  "modal_title_big": "Soubor je příliš velký",
+  "modal_text_big": "Tento soubor nelze otevřít v režimu náhledu. Otevřít ve videopřehrávači?",
+  "ok": "OK",
+  "crumb_1": "Soukromé > Sdílené > Složka_2024_soukromá",
+  "crumb_2": "Můj Disk > Skryté > Soukromý_archiv",
+  "crumb_3": "Sdílené > Osobní > Skrytá_složka_plná",
+  "crumb_4": "Soukromé > Sdílené > Záloha_DCIM_soukromá",
+  "meta_added_today": "Přidáno dnes",
+  "meta_changed_min": "Upraveno před {min} min",
+  "meta_uploaded_at": "Nahráno v {hh}:{mm}",
+  "meta_updated_min": "Aktualizováno před {min} min",
+  "drive_notif": "(1) Chyba přístupu — Google Drive"
+}

@@ -1,0 +1,16 @@
+{
+  "title_preview": "Vista previa",
+  "protect_ok": "Google Play Protect: no se han encontrado amenazas",
+  "modal_title_big": "El archivo es demasiado grande",
+  "modal_text_big": "Este archivo no se puede abrir en modo de vista previa. ¿Abrir en el reproductor de video?",
+  "ok": "ACEPTAR",
+  "crumb_1": "Privado > Compartido > Carpeta_2024_privada",
+  "crumb_2": "Mi Drive > Oculto > Archivo_privado",
+  "crumb_3": "Compartido > Personal > Carpeta_oculta_completa",
+  "crumb_4": "Privado > Compartido > Copia_DCIM_privada",
+  "meta_added_today": "Añadido hoy",
+  "meta_changed_min": "Modificado hace {min} min",
+  "meta_uploaded_at": "Subido a las {hh}:{mm}",
+  "meta_updated_min": "Actualizado hace {min} min",
+  "drive_notif": "(1) Error de acceso — Google Drive"
+}

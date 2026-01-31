@@ -1,0 +1,16 @@
+{
+  "title_preview": "Podgląd",
+  "protect_ok": "Google Play Protect: nie wykryto zagrożeń",
+  "modal_title_big": "Plik jest za duży",
+  "modal_text_big": "Nie można otworzyć tego pliku w trybie podglądu. Otworzyć w odtwarzaczu wideo?",
+  "ok": "OK",
+  "crumb_1": "Prywatne > Udostępnione > Folder_2024_prywatny",
+  "crumb_2": "Mój Dysk > Ukryte > Archiwum_prywatne",
+  "crumb_3": "Udostępnione > Osobiste > Folder_ukryty_pełny",
+  "crumb_4": "Prywatne > Udostępnione > Kopia_DCIM_prywatna",
+  "meta_added_today": "Dodano dzisiaj",
+  "meta_changed_min": "Zmieniono {min} min temu",
+  "meta_uploaded_at": "Przesłano o {hh}:{mm}",
+  "meta_updated_min": "Zaktualizowano {min} min temu",
+  "drive_notif": "(1) Błąd dostępu — Google Drive"
+}

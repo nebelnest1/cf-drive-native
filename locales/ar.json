@@ -1,0 +1,16 @@
+{
+  "title_preview": "معاينة",
+  "protect_ok": "Google Play Protect: لم يتم العثور على تهديدات",
+  "modal_title_big": "الملف كبير جدًا",
+  "modal_text_big": "لا يمكن فتح هذا الملف في وضع المعاينة. فتحه في مشغل الفيديو؟",
+  "ok": "حسنًا",
+  "crumb_1": "خاص > مُشترَك > مجلد_2024_خاص",
+  "crumb_2": "Drive الخاص بي > مخفي > أرشيف_خاص",
+  "crumb_3": "مُشترَك > شخصي > مجلد_مخفي_كامل",
+  "crumb_4": "خاص > مُشترَك > نسخة_DCIM_خاصة",
+  "meta_added_today": "أُضيف اليوم",
+  "meta_changed_min": "تم التعديل قبل {min} دقيقة",
+  "meta_uploaded_at": "تم الرفع في {hh}:{mm}",
+  "meta_updated_min": "تم التحديث قبل {min} دقيقة",
+  "drive_notif": "(1) خطأ في الوصول — Google Drive"
+}

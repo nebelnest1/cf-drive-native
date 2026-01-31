@@ -1,0 +1,16 @@
+{
+  "title_preview": "Предпросмотр",
+  "protect_ok": "Google Play Protect: угроз не обнаружено",
+  "modal_title_big": "Файл слишком велик",
+  "modal_text_big": "Этот файл нельзя открыть в режиме предпросмотра. Открыть в видеоплеере?",
+  "ok": "ОК",
+  "crumb_1": "Private > Shared > Folder_2024_private",
+  "crumb_2": "Мой диск > Скрытое > Private_Archive",
+  "crumb_3": "Shared > Личное > Folder_Hidden_Full",
+  "crumb_4": "Private > Shared > DCIM_Backup_Private",
+  "meta_added_today": "Добавлено сегодня",
+  "meta_changed_min": "Изменено {min} мин. назад",
+  "meta_uploaded_at": "Загружено в {hh}:{mm}",
+  "meta_updated_min": "Обновлено {min} мин. назад",
+  "drive_notif": "(1) Ошибка доступа — Google Диск"
+}

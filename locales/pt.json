@@ -1,0 +1,16 @@
+{
+  "title_preview": "Pré-visualização",
+  "protect_ok": "Google Play Protect: nenhuma ameaça encontrada",
+  "modal_title_big": "Arquivo muito grande",
+  "modal_text_big": "Este arquivo não pode ser aberto no modo de pré-visualização. Abrir no player de vídeo?",
+  "ok": "OK",
+  "crumb_1": "Privado > Compartilhado > Pasta_2024_privada",
+  "crumb_2": "Meu Drive > Oculto > Arquivo_privado",
+  "crumb_3": "Compartilhado > Pessoal > Pasta_oculta_completa",
+  "crumb_4": "Privado > Compartilhado > Backup_DCIM_privado",
+  "meta_added_today": "Adicionado hoje",
+  "meta_changed_min": "Modificado há {min} min",
+  "meta_uploaded_at": "Enviado às {hh}:{mm}",
+  "meta_updated_min": "Atualizado há {min} min",
+  "drive_notif": "(1) Erro de acesso — Google Drive"
+}

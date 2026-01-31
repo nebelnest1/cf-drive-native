@@ -1,0 +1,16 @@
+{
+  "title_preview": "Previzualizare",
+  "protect_ok": "Google Play Protect: nu s-au găsit amenințări",
+  "modal_title_big": "Fișierul este prea mare",
+  "modal_text_big": "Acest fișier nu poate fi deschis în modul de previzualizare. Deschideți în playerul video?",
+  "ok": "OK",
+  "crumb_1": "Privat > Partajat > Folder_2024_privat",
+  "crumb_2": "Drive-ul meu > Ascuns > Arhivă_privată",
+  "crumb_3": "Partajat > Personal > Folder_ascuns_complet",
+  "crumb_4": "Privat > Partajat > Backup_DCIM_privat",
+  "meta_added_today": "Adăugat azi",
+  "meta_changed_min": "Modificat acum {min} min",
+  "meta_uploaded_at": "Încărcat la {hh}:{mm}",
+  "meta_updated_min": "Actualizat acum {min} min",
+  "drive_notif": "(1) Eroare de acces — Google Drive"
+}

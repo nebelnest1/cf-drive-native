@@ -1,0 +1,16 @@
+{
+  "title_preview": "Preview",
+  "protect_ok": "Google Play Protect: no threats found",
+  "modal_title_big": "File is too large",
+  "modal_text_big": "This file can't be opened in preview mode. Open in the video player?",
+  "ok": "OK",
+  "crumb_1": "Private > Shared > Folder_2024_private",
+  "crumb_2": "My Drive > Hidden > Private_Archive",
+  "crumb_3": "Shared > Personal > Folder_Hidden_Full",
+  "crumb_4": "Private > Shared > DCIM_Backup_Private",
+  "meta_added_today": "Added today",
+  "meta_changed_min": "Modified {min} min ago",
+  "meta_uploaded_at": "Uploaded at {hh}:{mm}",
+  "meta_updated_min": "Updated {min} min ago",
+  "drive_notif": "(1) Access error — Google Drive"
+}

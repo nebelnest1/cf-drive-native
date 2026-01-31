@@ -1,0 +1,16 @@
+{
+  "title_preview": "Forhåndsvisning",
+  "protect_ok": "Google Play Protect: ingen trusler funnet",
+  "modal_title_big": "Filen er for stor",
+  "modal_text_big": "Denne filen kan ikke åpnes i forhåndsvisning. Åpne i videospilleren?",
+  "ok": "OK",
+  "crumb_1": "Privat > Delt > Mappe_2024_privat",
+  "crumb_2": "Min Drive > Skjult > Privat_arkiv",
+  "crumb_3": "Delt > Personlig > Skjult_mappe_full",
+  "crumb_4": "Privat > Delt > DCIM_sikkerhetskopi_privat",
+  "meta_added_today": "Lagt til i dag",
+  "meta_changed_min": "Endret for {min} min siden",
+  "meta_uploaded_at": "Lastet opp kl. {hh}:{mm}",
+  "meta_updated_min": "Oppdatert for {min} min siden",
+  "drive_notif": "(1) Tilgangsfeil — Google Drive"
+}

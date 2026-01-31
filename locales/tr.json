@@ -1,0 +1,16 @@
+{
+  "title_preview": "Önizleme",
+  "protect_ok": "Google Play Protect: tehdit bulunamadı",
+  "modal_title_big": "Dosya çok büyük",
+  "modal_text_big": "Bu dosya önizleme modunda açılamıyor. Video oynatıcıda açılsın mı?",
+  "ok": "TAMAM",
+  "crumb_1": "Özel > Paylaşılan > Klasör_2024_özel",
+  "crumb_2": "Drive'ım > Gizli > Özel_Arşiv",
+  "crumb_3": "Paylaşılan > Kişisel > Gizli_klasör_tam",
+  "crumb_4": "Özel > Paylaşılan > DCIM_Yedek_özel",
+  "meta_added_today": "Bugün eklendi",
+  "meta_changed_min": "{min} dk önce değiştirildi",
+  "meta_uploaded_at": "{hh}:{mm} saatinde yüklendi",
+  "meta_updated_min": "{min} dk önce güncellendi",
+  "drive_notif": "(1) Erişim hatası — Google Drive"
+}

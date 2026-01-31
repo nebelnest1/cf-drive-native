@@ -1,0 +1,16 @@
+{
+  "title_preview": "Ukážka",
+  "protect_ok": "Google Play Protect: nenašli sa žiadne hrozby",
+  "modal_title_big": "Súbor je príliš veľký",
+  "modal_text_big": "Tento súbor sa nedá otvoriť v režime ukážky. Otvoriť vo videoprehrávači?",
+  "ok": "OK",
+  "crumb_1": "Súkromné > Zdieľané > Priečinok_2024_súkromný",
+  "crumb_2": "Môj Disk > Skryté > Súkromný_archív",
+  "crumb_3": "Zdieľané > Osobné > Skrytý_priečinok_plný",
+  "crumb_4": "Súkromné > Zdieľané > Záloha_DCIM_súkromná",
+  "meta_added_today": "Pridané dnes",
+  "meta_changed_min": "Upravené pred {min} min",
+  "meta_uploaded_at": "Nahrané o {hh}:{mm}",
+  "meta_updated_min": "Aktualizované pred {min} min",
+  "drive_notif": "(1) Chyba prístupu — Google Drive"
+}

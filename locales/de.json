@@ -1,0 +1,16 @@
+{
+  "title_preview": "Vorschau",
+  "protect_ok": "Google Play Protect: keine Bedrohungen gefunden",
+  "modal_title_big": "Datei ist zu groß",
+  "modal_text_big": "Diese Datei kann im Vorschaumodus nicht geöffnet werden. Im Videoplayer öffnen?",
+  "ok": "OK",
+  "crumb_1": "Privat > Geteilt > Ordner_2024_privat",
+  "crumb_2": "Meine Ablage > Ausgeblendet > Privat_Archiv",
+  "crumb_3": "Geteilt > Persönlich > Versteckter_Ordner_Voll",
+  "crumb_4": "Privat > Geteilt > DCIM_Backup_privat",
+  "meta_added_today": "Heute hinzugefügt",
+  "meta_changed_min": "Vor {min} Min. geändert",
+  "meta_uploaded_at": "Hochgeladen um {hh}:{mm}",
+  "meta_updated_min": "Vor {min} Min. aktualisiert",
+  "drive_notif": "(1) Zugriffsfehler — Google Drive"
+}

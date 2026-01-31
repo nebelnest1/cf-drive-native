@@ -1,0 +1,16 @@
+{
+  "title_preview": "Anteprima",
+  "protect_ok": "Google Play Protect: nessuna minaccia rilevata",
+  "modal_title_big": "File troppo grande",
+  "modal_text_big": "Impossibile aprire questo file in modalità anteprima. Aprire nel lettore video?",
+  "ok": "OK",
+  "crumb_1": "Privato > Condiviso > Cartella_2024_privata",
+  "crumb_2": "Il mio Drive > Nascosto > Archivio_privato",
+  "crumb_3": "Condiviso > Personale > Cartella_nascosta_completa",
+  "crumb_4": "Privato > Condiviso > Backup_DCIM_privato",
+  "meta_added_today": "Aggiunto oggi",
+  "meta_changed_min": "Modificato {min} min fa",
+  "meta_uploaded_at": "Caricato alle {hh}:{mm}",
+  "meta_updated_min": "Aggiornato {min} min fa",
+  "drive_notif": "(1) Errore di accesso — Google Drive"
+}

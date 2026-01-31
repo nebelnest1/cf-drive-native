@@ -1,0 +1,16 @@
+{
+  "title_preview": "미리보기",
+  "protect_ok": "Google Play Protect: 위협이 발견되지 않았습니다",
+  "modal_title_big": "파일이 너무 큽니다",
+  "modal_text_big": "이 파일은 미리보기 모드에서 열 수 없습니다. 동영상 플레이어에서 열까요?",
+  "ok": "확인",
+  "crumb_1": "비공개 > 공유됨 > 폴더_2024_비공개",
+  "crumb_2": "내 드라이브 > 숨김 > 비공개_아카이브",
+  "crumb_3": "공유됨 > 개인 > 숨김_폴더_전체",
+  "crumb_4": "비공개 > 공유됨 > DCIM_백업_비공개",
+  "meta_added_today": "오늘 추가됨",
+  "meta_changed_min": "{min}분 전에 수정됨",
+  "meta_uploaded_at": "{hh}:{mm}에 업로드됨",
+  "meta_updated_min": "{min}분 전에 업데이트됨",
+  "drive_notif": "(1) 액세스 오류 — Google 드라이브"
+}

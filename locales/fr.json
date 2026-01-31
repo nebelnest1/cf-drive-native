@@ -1,0 +1,16 @@
+{
+  "title_preview": "Aperçu",
+  "protect_ok": "Google Play Protect : aucune menace détectée",
+  "modal_title_big": "Fichier trop volumineux",
+  "modal_text_big": "Ce fichier ne peut pas être ouvert en mode aperçu. L’ouvrir dans le lecteur vidéo ?",
+  "ok": "OK",
+  "crumb_1": "Privé > Partagé > Dossier_2024_privé",
+  "crumb_2": "Mon Drive > Masqué > Archive_privée",
+  "crumb_3": "Partagé > Personnel > Dossier_masqué_complet",
+  "crumb_4": "Privé > Partagé > Sauvegarde_DCIM_privée",
+  "meta_added_today": "Ajouté aujourd’hui",
+  "meta_changed_min": "Modifié il y a {min} min",
+  "meta_uploaded_at": "Téléversé à {hh}:{mm}",
+  "meta_updated_min": "Mis à jour il y a {min} min",
+  "drive_notif": "(1) Erreur d’accès — Google Drive"
+}

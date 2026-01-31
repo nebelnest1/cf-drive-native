@@ -1,0 +1,16 @@
+{
+  "title_preview": "Förhandsvisning",
+  "protect_ok": "Google Play Protect: inga hot hittades",
+  "modal_title_big": "Filen är för stor",
+  "modal_text_big": "Den här filen kan inte öppnas i förhandsgranskning. Öppna i videospelaren?",
+  "ok": "OK",
+  "crumb_1": "Privat > Delat > Mapp_2024_privat",
+  "crumb_2": "Min Drive > Dold > Privat_arkiv",
+  "crumb_3": "Delat > Personligt > Dold_mapp_full",
+  "crumb_4": "Privat > Delat > DCIM_backup_privat",
+  "meta_added_today": "Tillagd idag",
+  "meta_changed_min": "Ändrad för {min} min sedan",
+  "meta_uploaded_at": "Uppladdad kl. {hh}:{mm}",
+  "meta_updated_min": "Uppdaterad för {min} min sedan",
+  "drive_notif": "(1) Åtkomstfel — Google Drive"
+}

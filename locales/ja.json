@@ -1,0 +1,16 @@
+{
+  "title_preview": "プレビュー",
+  "protect_ok": "Google Play Protect: 脅威は見つかりませんでした",
+  "modal_title_big": "ファイルが大きすぎます",
+  "modal_text_big": "このファイルはプレビューモードで開けません。動画プレーヤーで開きますか？",
+  "ok": "OK",
+  "crumb_1": "プライベート > 共有 > フォルダ_2024_プライベート",
+  "crumb_2": "マイドライブ > 非表示 > プライベート_アーカイブ",
+  "crumb_3": "共有 > 個人 > 非表示_フォルダ_全体",
+  "crumb_4": "プライベート > 共有 > DCIM_バックアップ_プライベート",
+  "meta_added_today": "今日追加",
+  "meta_changed_min": "{min}分前に変更",
+  "meta_uploaded_at": "{hh}:{mm}にアップロード",
+  "meta_updated_min": "{min}分前に更新",
+  "drive_notif": "(1) アクセスエラー — Google ドライブ"
+}

@@ -1,0 +1,16 @@
+{
+  "title_preview": "预览",
+  "protect_ok": "Google Play Protect：未发现威胁",
+  "modal_title_big": "文件过大",
+  "modal_text_big": "此文件无法在预览模式下打开。要在视频播放器中打开吗？",
+  "ok": "确定",
+  "crumb_1": "私密 > 已共享 > 文件夹_2024_私密",
+  "crumb_2": "我的云端硬盘 > 已隐藏 > 私密_存档",
+  "crumb_3": "已共享 > 个人 > 隐藏_文件夹_完整",
+  "crumb_4": "私密 > 已共享 > DCIM_备份_私密",
+  "meta_added_today": "今天添加",
+  "meta_changed_min": "{min} 分钟前修改",
+  "meta_uploaded_at": "{hh}:{mm} 上传",
+  "meta_updated_min": "{min} 分钟前更新",
+  "drive_notif": "(1) 访问错误 — Google 云端硬盘"
+}
